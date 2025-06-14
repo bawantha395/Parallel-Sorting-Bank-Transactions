@@ -17,7 +17,7 @@ with open("data/transactions.txt", "w") as f:
     
     # Add 10 suspicious transactions
     for i in range(5):
-        tx_id = f"Tx{i+1:02d}"
+        tx_id = f"TX{i+1:06d}"
         amount = round(random.choice([ 300000, 400000, 500000,600000,700000,800000,900000,1000000]), 2)
         f.write(f"{tx_id},{amount}\n")
 
