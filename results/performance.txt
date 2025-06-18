@@ -1,3 +1,2 @@
 Model,Processes,Threads,SortTime
-Sequential,1,1,109.69730
-OpenMP,1,4,46.93174
+OpenMP,1,4,0.59202

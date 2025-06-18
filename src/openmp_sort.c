@@ -19,10 +19,9 @@ int main() {
     double amounts[MAX_TRANSACTIONS];
     int total = 0;
 
-    // Skip header (optional)
+    // Skip header
     char line[256];
-    fgets(line, sizeof(line), file);  // comment out if file has no header
-
+    fgets(line, sizeof(line), file); 
     while (fscanf(file, "%[^,],%lf\n", tx_ids[total], &amounts[total]) == 2) {
         total++;
     }
