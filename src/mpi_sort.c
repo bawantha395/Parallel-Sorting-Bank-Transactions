@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
         printf("Total transactions: %d\n", total);
     }
 
-    // Broadcast total number of transactions
+    // Broadcast transactions
     MPI_Bcast(&total, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
     // Calculate local count
@@ -81,7 +81,7 @@ int main(int argc, char* argv[]) {
     MPI_Barrier(MPI_COMM_WORLD);
     start_time = MPI_Wtime();
 
-    // Each process bubble sort its chunk
+    // bubble sort 
     for (int i = 0; i < local_count - 1; i++) {
         for (int j = 0; j < local_count - 1; j++) {
             if (local_amounts[j] > local_amounts[j + 1]) {
@@ -120,10 +120,10 @@ int main(int argc, char* argv[]) {
                 all_amounts, recvcounts, recvdispls, MPI_DOUBLE,
                 0, MPI_COMM_WORLD);
 
-    // Rank 0 final sort
+    // final sort
     if (rank == 0) {
         for (int i = 0; i < total - 1; i++) {
-            for (int j = 0; j < total - 1; j++) {
+            for (int j = 0; j < total - i- 1; j++) {
                 if (all_amounts[j] > all_amounts[j + 1]) {
                     double tmp_amt = all_amounts[j];
                     all_amounts[j] = all_amounts[j + 1];

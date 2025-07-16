@@ -44,7 +44,7 @@ int main(int argc, char* argv[]) {
     // Broadcast total count
     MPI_Bcast(&total, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
-    // Figure out local count
+    // local count
     int base = total / size;
     int rem = total % size;
     if (rank < rem) {
@@ -87,9 +87,10 @@ int main(int argc, char* argv[]) {
     MPI_Barrier(MPI_COMM_WORLD);
     start_time = MPI_Wtime();
 
-    // Each process sorts its chunk using OpenMP
+    // bubble sort
+    #pragma omp parallel 
     for (int i = 0; i < local_count - 1; i++) {
-        #pragma omp parallel for
+        #pragma omp for
         for (int j = 0; j < local_count - 1; j++) {
             if (local_amounts[j] > local_amounts[j + 1]) {
                 double tmp_amt = local_amounts[j];
@@ -128,7 +129,7 @@ int main(int argc, char* argv[]) {
                 all_amounts, recvcounts, recvdispls, MPI_DOUBLE,
                 0, MPI_COMM_WORLD);
 
-    // Rank 0 does final sort with OpenMP
+    //final sort 
     if (rank == 0) {
         omp_set_num_threads(NUM_THREADS);
 

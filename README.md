@@ -25,6 +25,7 @@ Compile each implementation using the following commands:
 4. **Hybrid Sort**
    ```bash
    mpicc -fopenmp src/hybrid_sort.c -o hybrid_sort
+   
    gcc-15 -fopenmp -I/opt/homebrew/Cellar/mpich/4.3.0/include -L/opt/homebrew/Cellar/mpich/4.3.0/lib -lmpi -lpmpi src/hybrid_sort.c -o hybrid_sort
    ```
 
